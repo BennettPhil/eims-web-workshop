@@ -1,8 +1,6 @@
 # Two simple Copilot evals
 
-In this kit, **workshop root** means the folder containing the main README and
-`package.json`. If the kit is in a repository subfolder, run workshop commands
-from that subfolder.
+**Workshop root** means the folder containing the main README and `package.json`.
 
 Start with these. Each example is about 30 lines, runs without an LLM judge,
 and saves its result on the trace in Phoenix. The existing `read-agents.ts`,
@@ -18,8 +16,6 @@ npm --prefix evals/typescript ci
 ```
 
 If you do not use nvm, install Node 24.11 or newer within Node 24 another way.
-The two simple scripts also run on the existing Node 23.9 installation; its
-experimental Type Stripping warning is informational.
 Then run:
 
 ```sh
@@ -85,14 +81,13 @@ Do not compare those two numbers as if they measured the same thing.
 
 ## Get actual Copilot traces
 
-Start local Phoenix using the participant guide. In a separate terminal at the
+Start local Phoenix using [the setup instructions](../../README.md#create-a-trace). In a separate terminal at the
 workshop root, launch Copilot in your task repository:
 
 ```sh
 npm run copilot:traced -- /absolute/path/to/task-repository
 ```
 
-For a disposable task, follow [the sample instructions](../../sample/README.md).
 The launcher enables Copilot's built-in OpenTelemetry exporter and content
 capture for this process, sending to local Phoenix in `ai_workshop`. Use this
 launcher again for the rerun. No tracing plugin or global configuration edit is needed.
@@ -100,23 +95,20 @@ Use Copilot CLI 1.0.83 and Phoenix 20.8.0 (the versions rehearsed here), or rehe
 your installed versions first. `copilot help monitoring` describes the built-in
 settings. Wait for export and confirm that the task's tool spans are visible.
 
-The new examples also read the workshop's existing Arize hook traces. The hook
-installer did not produce traces in this machine's rehearsal, so the built-in
-exporter is the demonstrated route. Avoid running both exporters for the same task.
-Tracing captures prompts and tool content; use the disposable sample or approved material.
+The examples also read Arize hook traces. Avoid running both exporters for the same task.
+Tracing captures prompts and tool content; use material approved for the exercise.
 
 ## Make a small example produce useful output
 
 In fresh Copilot sessions, try these deliberately controlled demonstrations:
 
-1. Read `task.md` and summarize it; do not run tests. Expect `NOT_OBSERVED`.
-2. Complete the sample task and run `npm test`. Expect `TEST_COMMAND_FOUND`.
+1. Read a file in your task repository; do not run tests. Expect `NOT_OBSERVED`.
+2. Ask Copilot to run the test command configured in your evaluator. Expect
+   `TEST_COMMAND_FOUND` if that command is recorded.
 3. Ask Copilot to use `view` on a deliberately nonexistent file. Expect an error
    count greater than zero, if the tool call is made and its failure exported.
 
 These probes test the evals. They are not evidence that a configuration change
 improved an agent. For a real before/after comparison, keep the task unchanged.
 
-[Live rehearsal results](../../facilitator/simple-evals-rehearsal-2026-09-07.md)
-record both labels from real Copilot runs, plus annotation readback.
 The [older examples and judge setup](README.md) remain available as an optional extension.

@@ -7,21 +7,12 @@
     "node": "^24.11.0"
   },
   "scripts": {
-    "slides:workflow": "slidev slides/iterative-workflows.md --port 3030",
-    "slides:build:workflow": "slidev build slides/iterative-workflows.md --out dist/iterative-workflows --base ./ --router-mode hash",
-    "slides:export:workflow": "node scripts/prepare-exports.mjs && slidev export slides/iterative-workflows.md --output exports/ignitis-iterative-workflows.pdf --wait 2000 --wait-until networkidle",
-    "doctor": "node scripts/doctor.mjs",
-    "sample:check": "npm --prefix sample test",
     "preevals:test": "node -e \"if (!require('node:fs').existsSync('evals/typescript/node_modules/@arizeai/phoenix-evals/package.json')) { console.error('Eval dependencies are missing. Run: npm --prefix evals/typescript ci'); process.exit(1); }\"",
     "evals:test": "npm --prefix evals/typescript test",
     "copilot:traced": "node scripts/copilot-traced.mjs",
     "eval:tests": "node evals/typescript/test-command.ts",
     "eval:errors": "node evals/typescript/tool-errors.ts",
-    "test": "node --test tests/doctor.test.mjs && npm run evals:test",
-    "typecheck": "npm --prefix evals/typescript run typecheck"
-  },
-  "devDependencies": {
-    "@slidev/cli": "52.19.0",
-    "playwright-chromium": "^1.62.1"
+    "typecheck": "npm --prefix evals/typescript run typecheck",
+    "test": "npm run evals:test"
   }
 }
