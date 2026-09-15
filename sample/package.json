@@ -1,0 +1,11 @@
+{
+  "name": "article-card-workshop-sample",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test render-card.test.mjs"
+  },
+  "engines": {
+    "node": "^24.11.0"
+  }
+}

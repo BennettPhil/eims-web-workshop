@@ -1,0 +1,11 @@
+node_modules/
+dist/
+slides/dist/
+exports/
+runs/
+workspaces/
+tmp/
+.DS_Store
+.env*
+!.env.example
+*.log
