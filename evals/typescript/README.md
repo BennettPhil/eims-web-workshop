@@ -44,7 +44,8 @@ Use its absolute path as recorded in the trace. Keep one repository per Phoenix
 project when evaluating a batch. If your Phoenix server requires authentication,
 set `PHOENIX_API_KEY`; that key authenticates to Phoenix, not the judge provider.
 
-All commands below run from **evals/typescript**.
+Commands below run from **evals/typescript**, except the root npm shortcut shown
+in the judge demo.
 
 ## 1. Check the trace
 
@@ -96,8 +97,20 @@ for server credentials and provider options.
 
 ## 4. Run the LLM judge
 
-Read the rubric in `check-verification.ts`. Predict the result, then inspect the
-tool arguments in Phoenix before sending them to the model:
+For the facilitator demo, read the rubric in `check-verification.ts`. Predict the
+result, then inspect the tool arguments in Phoenix before sending them to the model:
+
+From the **workshop root**, with `evals/typescript/.env` configured above:
+
+```sh
+npm run eval:judge -- <TRACE_ID> --send-to-judge
+```
+
+The npm command loads that file; check its Phoenix project, repository path and
+model before the demo. Use one completed trace ID to keep the demo to one run.
+Omitting the trace ID evaluates the whole configured project.
+
+Or, from **evals/typescript**:
 
 ```sh
 node --env-file=.env check-verification.ts <TRACE_ID> --send-to-judge

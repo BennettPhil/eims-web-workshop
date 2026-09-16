@@ -12,6 +12,7 @@
     "copilot:traced": "node scripts/copilot-traced.mjs",
     "eval:tests": "node evals/typescript/test-command.ts",
     "eval:errors": "node evals/typescript/tool-errors.ts",
+    "eval:judge": "node --env-file=evals/typescript/.env evals/typescript/check-verification.ts",
     "typecheck": "npm --prefix evals/typescript run typecheck",
     "test": "npm run evals:test"
   }

@@ -53,6 +53,38 @@ Both save trace annotations in Phoenix and need no model provider or API key.
 They check recorded behaviour; run your task repository's own tests separately.
 Omit the trace ID to evaluate all existing traces in `ai_workshop`.
 
+## Optional LLM judge demo
+
+The facilitator can demonstrate a model judging whether recorded tool requests
+asked for tests, linting or typechecking. It saves a `verification-request`
+annotation with a label and explanation; it does not decide whether checks passed.
+
+Follow [the judge setup](evals/typescript/README.md#3-set-up-the-judge-in-phoenix)
+first: configure a built-in provider in Phoenix 19.16+, then create
+`evals/typescript/.env` from its `.env.example` if you do not already have one.
+Review any existing file before the demo, and set:
+
+```dotenv
+PHOENIX_BASE_URL=http://127.0.0.1:6006
+PHOENIX_PROJECT_NAME=ai_workshop
+REPO_ROOT=/absolute/path/to/your/task-repository
+PHOENIX_JUDGE_MODEL=openai:your-model-id
+```
+
+Use the actual project, repository path and configured provider/model. The npm
+command loads this file. A custom provider saved only in Phoenix's UI is not
+selected by this evaluator.
+
+Inspect the selected trace's tool arguments, then run from this repository root:
+
+```sh
+npm run eval:judge -- <TRACE_ID> --send-to-judge
+```
+
+The flag permits sending those tool arguments through Phoenix to its configured
+model provider. Include one trace ID for the demo; without it, the command judges
+all usable traces in the configured project.
+
 ## Write your own eval
 
 Copy `evals/typescript/test-command.ts` to `evals/typescript/my-eval.ts`.
